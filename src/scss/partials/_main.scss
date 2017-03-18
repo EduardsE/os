@@ -1,0 +1,50 @@
+body {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+
+  .main {
+    height: 100%;
+  }
+}
+
+.top-bar {
+  height:50px;
+  padding: 15px;
+  border-bottom: 1px solid grey;
+  background: rgba(78, 145, 234, 0.87)
+}
+
+.container {
+  width: 90%;
+  height: calc(100% - 50px);
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  margin: 0 auto;
+
+  .hard-drive {
+    height: 200px;
+    width: 50px;
+    border: 1px solid grey;
+    height: 240px;
+    width: 160px;
+    border: 1px solid grey;
+    margin: auto;
+    position: relative;
+
+    .hard-drive-top, .hard-drive-bottom {
+      width: 100%;
+      height: 70px;
+      border: 1px solid grey;
+      border-radius: 50%;
+      position: absolute;
+      top: -35px;
+      background: white;
+    }
+
+    .hard-drive-bottom {
+      top: 200px;
+    }
+  }
+}
