@@ -446,6 +446,26 @@ body .main {
   background: rgba(78, 145, 234, 0.87);
   margin-bottom: 100px;
 }
+.top-bar .animation.button {
+  margin-left: 20px;
+  margin-left: 20px;
+  background-color: white;
+  padding: 9px 21px;
+  border-radius: 5px;
+  color: black;
+  text-decoration: none;
+  border: 1px solid grey;
+}
+.top-bar .animation.button:hover {
+  background-color: #e0dcdc;
+}
+
+.data-container {
+  position: absolute;
+  top: 140px;
+  width: 100%;
+  text-align: center;
+}
 
 .data {
   display: inline-block;
@@ -458,7 +478,7 @@ body .main {
 
 .container {
   width: 90%;
-  height: calc(100% - 50px);
+  height: calc(100% - 270px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -473,6 +493,14 @@ body .main {
   border: 1px solid grey;
   margin: auto;
   position: relative;
+  padding: 40px 0px;
+}
+.container .hard-drive .data-item {
+  display: inline-block;
+  width: 55px;
+  height: 26px;
+  margin: 2px;
+  border: 1px solid grey;
 }
 .container .hard-drive .hard-drive-top, .container .hard-drive .hard-drive-bottom {
   width: 100%;
