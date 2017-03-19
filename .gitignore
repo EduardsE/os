@@ -57,3 +57,7 @@ typings/
 # dotenv environment variables file
 .env
 
+*.min.css
+*.min.css.map
+*.min.js
+.sass-cache/
