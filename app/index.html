@@ -18,7 +18,7 @@
   <body>
     <main class="main" role="main">
       <div class="top-bar">
-        <select>
+        <select class="raid-select">
           <option value="raid_0">RAID 0</option>
           <option value="raid_1">RAID 1</option>
           <option value="raid_5">RAID 5</option>
@@ -26,8 +26,17 @@
           <option value="raid_20">RAID 20</option>
         </select>
 
-        <a class="animation button" href="javascript:;">
-          Show me
+        <a class="start-drawing button" href="javascript:;">
+          Write data
+        </a>
+        <a class="reset-failures button" href="javascript:;">
+          Reset
+        </a>
+        <a class="hard-drive-failure button" href="javascript:;">
+          Hard drive failure
+        </a>
+        <a class="read-data button" href="javascript:;">
+          Read data
         </a>
       </div>
 
@@ -37,12 +46,6 @@
           <div class="data-item">2</div>
           <div class="data-item">3</div>
           <div class="data-item">4</div>
-          <div class="data-item">5</div>
-          <div class="data-item">6</div>
-          <div class="data-item">7</div>
-          <div class="data-item">8</div>
-          <div class="data-item">9</div>
-          <div class="data-item">10</div>
         </div>
       </div>
 
@@ -55,14 +58,21 @@
 
           </div>
         </div>
-        <div class="hard-drive">
+<!--         <div class="hard-drive">
           <div class="hard-drive-top">
 
           </div>
           <div class="hard-drive-bottom">
 
           </div>
+        </div> -->
+      </div>
+
+      <div class="result-data-container">
+        <div class="data">
+
         </div>
+        <p class="message"></p>
       </div>
     </main>
 
