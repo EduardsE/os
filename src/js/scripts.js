@@ -11,7 +11,7 @@
     var data_array = $(".main .data")
     var data_items = $(".main .data").find(".data-item")
     var hard_drives = $(".hard-drive")
-    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map((v, i) => i);
+    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map(function(v, i) { return i; });
 
     for (var i = 0; i < data_items.length; i++) {
       var single_data = data_items[i];
@@ -26,7 +26,7 @@
     var data_array = $(".main .data")
     var data_items = $(".main .data").find(".data-item")
     var hard_drives = $(".hard-drive")
-    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map((v, i) => i);
+    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map(function(v, i) { return i; });
 
     for (var i = 0; i < data_items.length; i++) {
       var single_data = data_items[i];
@@ -46,7 +46,7 @@
     var data_array = $(".main .data")
     var data_items = $(".main .data").find(".data-item")
     var hard_drives = $(".hard-drive")
-    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map((v, i) => i);
+    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map(function(v, i) { return i; });
 
     var items_first_half = $(data_items).slice(0, data_items.length/2)
     var items_second_half = $(data_items).slice(data_items.length/2)
@@ -72,7 +72,7 @@
     var hard_drive_amount = $(hard_drives).length
     var random_num = getRandomIntInclusive(0, window.healthy_hard_drives.length-1)
     var hard_drive_to_fail = window.healthy_hard_drives[random_num];
-    window.healthy_hard_drives = window.healthy_hard_drives.filter((v, i) => i !== random_num);
+    window.healthy_hard_drives = window.healthy_hard_drives.filter(function(v, i) { return i !== random_num; });
 
     $(hard_drives[hard_drive_to_fail]).addClass("failed")
   }
