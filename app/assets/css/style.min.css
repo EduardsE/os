@@ -446,7 +446,7 @@ body .main {
   background: rgba(78, 145, 234, 0.87);
   margin-bottom: 100px;
 }
-.top-bar .animation.button {
+.top-bar .button {
   margin-left: 20px;
   margin-left: 20px;
   background-color: white;
@@ -456,7 +456,7 @@ body .main {
   text-decoration: none;
   border: 1px solid grey;
 }
-.top-bar .animation.button:hover {
+.top-bar .button:hover {
   background-color: #e0dcdc;
 }
 
@@ -484,6 +484,9 @@ body .main {
   justify-content: center;
   margin: 0 auto;
 }
+.container.raid_10 .hard-drive:nth-of-type(even) {
+  margin-left: -40px;
+}
 .container .hard-drive {
   height: 200px;
   width: 50px;
@@ -495,12 +498,28 @@ body .main {
   position: relative;
   padding: 40px 0px;
 }
+.container .hard-drive.failed {
+  background: rgba(217, 3, 3, 0.39);
+}
+.container .hard-drive.failed .hard-drive-top, .container .hard-drive.failed .hard-drive-bottom {
+  background: #ffe6e6;
+}
+.container .hard-drive.healthy {
+  background-color: #77d977;
+}
+.container .hard-drive.healthy .hard-drive-top, .container .hard-drive.healthy .hard-drive-bottom {
+  background: #edffed;
+}
 .container .hard-drive .data-item {
   display: inline-block;
   width: 55px;
-  height: 26px;
   margin: 2px;
   border: 1px solid grey;
+  height: 36px;
+  line-height: 32px;
+}
+.container .hard-drive .data-item.usable {
+  background: #ffff26;
 }
 .container .hard-drive .hard-drive-top, .container .hard-drive .hard-drive-bottom {
   width: 100%;
@@ -513,6 +532,27 @@ body .main {
 }
 .container .hard-drive .hard-drive-bottom {
   top: 200px;
+}
+
+.result-data-container {
+  position: relative;
+  top: -110px;
+}
+
+.message {
+  text-align: center;
+  display: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+.message.error {
+  color: red;
+}
+.message.visible {
+  display: inline;
+}
+.message.success {
+  color: green;
 }
 
 @font-face {

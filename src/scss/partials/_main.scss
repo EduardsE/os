@@ -16,7 +16,7 @@ body {
   background: rgba(78, 145, 234, 0.87);
   margin-bottom: 100px;
 
-  .animation.button {
+  .button {
     margin-left: 20px;
     margin-left: 20px;
     background-color: white;
@@ -57,6 +57,13 @@ body {
   justify-content: center;
   margin: 0 auto;
 
+  &.raid_10 {
+    .hard-drive:nth-of-type(even) {
+      margin-left: -40px;
+    }
+  }
+
+
   .hard-drive {
     height: 200px;
     width: 50px;
@@ -68,12 +75,33 @@ body {
     position: relative;
     padding: 40px 0px;
 
+    &.failed {
+      background: rgba(217, 3, 3, 0.39);
+
+      .hard-drive-top, .hard-drive-bottom {
+        background: #ffe6e6;
+      }
+    }
+
+    &.healthy {
+      background-color: #77d977;
+
+      .hard-drive-top, .hard-drive-bottom {
+        background: #edffed;
+      }
+    }
+
     .data-item {
       display: inline-block;
       width: 55px;
-      height: 26px;
       margin: 2px;
       border: 1px solid grey;
+      height: 36px;
+      line-height: 32px;
+
+      &.usable {
+        background: #ffff26;
+      }
     }
 
     .hard-drive-top, .hard-drive-bottom {
@@ -89,5 +117,29 @@ body {
     .hard-drive-bottom {
       top: 200px;
     }
+  }
+}
+
+.result-data-container {
+  position: relative;
+  top: -110px;
+}
+
+.message {
+  text-align: center;
+  display: none;
+  font-size: 24px;
+  font-weight: bold;
+
+  &.error {
+    color: red;
+  }
+
+  &.visible {
+    display: inline;
+  }
+
+  &.success {
+    color: green;
   }
 }
