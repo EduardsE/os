@@ -44,7 +44,7 @@
     var data_array = $(".main .data")
     var data_items = $(".main .data").find(".data-item")
     var hard_drives = $(".hard-drive")
-    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map((v, i) => i);
+    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map(function(v, i) { return i; });
 
     var data = window.original_data.concat(window.original_data);
     data = shuffle(data)
@@ -74,7 +74,7 @@
     var data_array = $(".main .data")
     var data_items = $(".main .data").find(".data-item")
     var hard_drives = $(".hard-drive")
-    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map((v, i) => i);
+    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map(function(v, i) { return i; });
 
     var data = window.original_data.concat(window.original_data).concat(window.original_data);
     data = shuffle(data)
