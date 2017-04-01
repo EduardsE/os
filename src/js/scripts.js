@@ -2,8 +2,6 @@
 
   'use strict';
 
-
-
   window.original_data = [1, 2, 3, 4];
   window.healthy_hard_drives = [];
 
@@ -42,6 +40,84 @@
   }
 
 
+  function drawRaid_5() {
+    var data_array = $(".main .data")
+    var data_items = $(".main .data").find(".data-item")
+    var hard_drives = $(".hard-drive")
+    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map((v, i) => i);
+
+    var data = window.original_data.concat(window.original_data);
+    data = shuffle(data)
+
+    $(hard_drives).each(function(index, drive) {
+      var first_data_element = data.splice(0, 1);
+      var second_data_element = data.splice(0, 1);
+
+      while (first_data_element[0] == second_data_element[0]) {
+        data.push(second_data_element);
+        second_data_element = data.splice(0, 1);
+      }
+
+      if (data.length == 2 && data[0] == data[1]) {
+        data[0] = second_data_element
+        second_data_element = data[1]
+      }
+
+      $(data_items[0]).clone().text(first_data_element).appendTo($(hard_drives[index]))
+      $(data_items[0]).clone().text(second_data_element).appendTo($(hard_drives[index]))
+
+    });
+  };
+
+
+  function drawRaid_6() {
+    var data_array = $(".main .data")
+    var data_items = $(".main .data").find(".data-item")
+    var hard_drives = $(".hard-drive")
+    window.healthy_hard_drives = Array(hard_drives.length).fill(0).map((v, i) => i);
+
+    var data = window.original_data.concat(window.original_data).concat(window.original_data);
+    data = shuffle(data)
+
+    var arrays_good = false
+
+    var complete_data_array;
+    while(!arrays_good) {
+      complete_data_array = [[], [], [], []]
+      data.forEach(function(value, index) {
+        complete_data_array[index%4].push(value)
+      });
+      data = shuffle(data);
+      arrays_good = checkIfAllArraysGood(complete_data_array);
+    }
+
+    $(hard_drives).each(function(index, drive_el) {
+
+      complete_data_array[index%4].forEach(function (el) {
+        $(data_items[0]).clone().text(el).appendTo($(hard_drives[index]))
+      });
+    })
+  };
+
+  function checkIfAllArraysGood(array) {
+    if (array[0].length == 0) {
+      return false;
+    }
+
+    var result = true
+    array.forEach(function (subarray) {
+      if (!checkIfDifferent(subarray[0], subarray[1], subarray[2])) {
+        result = false;
+      }
+    });
+
+    return result;
+  }
+
+  function checkIfDifferent(val1, val2, val3) {
+    return (val1 != val2 && val2 != val3 && val1 != val3)
+  }
+
   function drawRaid_10() {
     var data_array = $(".main .data")
     var data_items = $(".main .data").find(".data-item")
@@ -51,10 +127,8 @@
     var items_first_half = $(data_items).slice(0, data_items.length/2)
     var items_second_half = $(data_items).slice(data_items.length/2)
 
-
-
-    items_first_half.appendTo($($(hard_drives)[0]))
-    items_second_half.appendTo($($(hard_drives)[1]))
+    items_first_half.clone().appendTo($($(hard_drives)[0]))
+    items_second_half.clone().appendTo($($(hard_drives)[1]))
     items_first_half.clone().appendTo($($(hard_drives)[2]))
     items_second_half.clone().appendTo($($(hard_drives)[3]))
   }
@@ -91,14 +165,33 @@
           clone.appendTo(container);
         }
 
-        return;
+        break;
       case "raid_1":
         for (var i=0; i<2; i++) {
           clone = $(hard_drive).clone()
           clone.appendTo(container);
         }
 
-        return;
+        break;
+
+      case "raid_5":
+        for (var i=0; i<4; i++) {
+          clone = $(hard_drive).clone()
+          clone.appendTo(container);
+        }
+
+        $(container).addClass("raid_5")
+        break;
+
+      case "raid_6":
+        for (var i=0; i<4; i++) {
+          clone = $(hard_drive).clone()
+          clone.appendTo(container);
+        }
+
+        $(container).addClass("raid_5")
+        break;
+
       case "raid_10":
         for (var i=0; i<4; i++) {
           clone = $(hard_drive).clone()
@@ -106,17 +199,33 @@
         }
 
         $(container).addClass("raid_10")
-        return;
+        break;
 
     }
 
-    var hard_drives = $(".hard-drive")
-    $(hard_drives).removeClass("failed")
-    $(hard_drives).removeClass("healthy")
+    $('.hard-drive').removeClass("failed")
+    $('.hard-drive').removeClass("healthy")
     $('.message').removeClass("visible error success")
     $(".hard-drive").find(".data-item").remove()
 
+    $('main').removeClass("raid_0")
+    $('main').removeClass("raid_1")
+    $('main').removeClass("raid_5")
+    $('main').removeClass("raid_6")
+    $('main').removeClass("raid_10")
+
+    disableButtons(['write-data']);
+
+
     window.healthy_hard_drives = []
+  }
+
+
+  function disableButtons(available_classes) {
+    $('a.button').attr('disabled', true);
+    available_classes.forEach(function(el) {
+      $('a.button.'+el).attr('disabled', false);
+    })
   }
 
 
@@ -124,9 +233,6 @@
     for (var j = 0; j < window.healthy_hard_drives.length; j++) {
       $($('.hard-drive')[window.healthy_hard_drives[j]]).addClass("healthy")
     }
-
-    $(".message").addClass("visible success");
-    $(".message").text("Data successfully read.")
   }
 
 
@@ -157,17 +263,19 @@
         displayMessage('error');
       } else {
         displayMessage('success');
-        paintHealthyGreen();
       }
+      paintHealthyGreen();
       return;
     }
 
     if ($(".raid-select").val() == "raid_1") {
       paintHealthyGreen();
+      displayMessage('success');
       return
     }
 
-    if ($(".raid-select").val() == "raid_10") {
+
+    if ($(".raid-select").val() == "raid_5" || $(".raid-select").val() == "raid_10" || $(".raid-select").val() == "raid_6") {
       paintHealthyGreen();
 
       var data = [];
@@ -200,6 +308,15 @@
 
       if (matches) {
         displayMessage("success");
+
+        $('.hard-drive.healthy').find('.data-item').each(function(index, element) {
+          var num_value = parseInt($(element).text());
+          if (data.indexOf(num_value) != -1) {
+            data.splice(data.indexOf(num_value), 1);
+            $(element).addClass("usable");
+          }
+        })
+
       } else {
         displayMessage("error");
       }
@@ -209,21 +326,48 @@
   }
 
   var startDrawing = function () {
+    $('.main').addClass($(".raid-select").val());
+
     switch ($(".raid-select").val()) {
       case "raid_0":
         drawRaid_0();
-        return;
+        break;
       case "raid_1":
         drawRaid_1();
-        return;
+        break;
+      case "raid_5":
+        drawRaid_5();
+        break;
+      case "raid_6":
+        drawRaid_6();
+        break;
       case "raid_10":
         drawRaid_10();
-        return;
+        break;
     }
+
+    disableButtons(['reset', 'hard-drive-failure', 'read-data'])
   }
 
+  /**
+   * Shuffles array in place.
+   * @param {Array} a items The array containing the items.
+   */
+  var shuffle = function (a) {
+    var j, x, i;
+    for (i = a.length; i; i--) {
+      j = Math.floor(Math.random() * i);
+      x = a[i - 1];
+      a[i - 1] = a[j];
+      a[j] = x;
+    }
+
+    return a;
+  }
+
+
   $(function () {
-    $('.start-drawing.button').click(function() {
+    $('.write-data.button').click(function() {
       $(".hard-drive .data-item").remove();
       startDrawing()
     })
@@ -232,19 +376,21 @@
       failHardDrive()
     })
 
-    $('.reset-failures.button').click(function() {
+    $('.reset.button').click(function() {
       reset()
     })
 
     $('.read-data.button').click(function() {
-      readData()
+      readData();
+      disableButtons(['reset'])
     })
 
     $( ".raid-select").change(function() {
       reset();
     });
 
-    // reset();
+
+    reset();
   });
 
 })(jQuery, window, document);
