@@ -2,12 +2,12 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>FireShell by @toddmotto</title>
+    <title>y tho</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
+    <link rel="icon" href="http://ytho.tk/favicon.ico?v=2" />
     <link href="//www.google-analytics.com" rel="dns-prefetch">
     <link href="//ajax.googleapis.com" rel="dns-prefetch">
     <link href="assets/css/style.min.css" rel="stylesheet">
@@ -38,6 +38,41 @@
         <a class="read-data button" href="javascript:;">
           Read data
         </a>
+
+        <a href="javascript:;" class="help-button">
+          <img src="assets/img/help.png" alt="Help">
+        </a>
+      </div>
+
+      <div class="description">
+        <div class="raid_0">
+          <h1 class="title">RAID 0</h1>
+          <p>RAID 0 consists of striping data and it doesn't use redundancy. <br>
+            Therefore, failure of one drive causes the loss of the entire RAID 0 volume.</p>
+        </div>
+        <div class="raid_1">
+          <h1 class="title">RAID 1</h1>
+          <p>RAID 1 consists of data mirroring, identical data is written to two drives. <br>
+            If there's a failure in one drive, data can be read from the other one.
+          </p>
+        </div>
+        <div class="raid_5">
+          <h1 class="title">RAID 5</h1>
+          <p>RAID 5 consists of striping with distributed parity. <br>
+            Parity information is spread across the drives along with the data and can be used to regenerate any missing data in case of one disk failure.</p>
+        </div>
+        <div class="raid_6">
+          <h1 class="title">RAID 6</h1>
+          <p>RAID 6 consists of striping with double distributed parity. <br>
+            Unlike in RAID 5, data can be recovered even if two drives fail.
+          </p>
+        </div>
+        <div class="raid_10">
+          <h1 class="title">RAID 10</h1>
+          <p>RAID 10 combines RAID 0 and RAID 1 - striping data between two drives and mirroring that. <br>
+            If one drive fails, then data still can be successfully read from the other drives. If 2 drives fail, you might get lucky and data still could be read.
+          </p>
+        </div>
       </div>
 
       <div class="data-container">
@@ -74,6 +109,25 @@
 
         </div>
         <p class="message"></p>
+      </div>
+
+      <div class="info-overlay">
+        <a href="javascript:;" class="close-button">
+          <img src="assets/img/close.png" alt="Close">
+        </a>
+        <h3>Hello!</h3>
+        <p>This is a visualization of RAID 0, 1, 5, 6, 10 levels.</p>
+        <h4>How it works?</h4>
+        <p>You can select the RAID level in top bar, by default RAID 0 is shown. <br>
+          Start by writing data in drives (Write data button). <br>
+          Then there are 3 options:
+        </p>
+        <ul>
+          <li>Hard drive failure <i>(it is randomized)</i>;</li>
+          <li>Reset - if you want to start again;</li>
+          <li>Read data - we will tell you if it's possible.</li>
+        </ul>
+        <p>Enjoy!</p>
       </div>
     </main>
 

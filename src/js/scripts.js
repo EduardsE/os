@@ -158,6 +158,7 @@
     var clone = $(hard_drive).clone()
 
     $(container).empty();
+    $(".description div").removeClass('active');
     switch ($(".raid-select").val()) {
       case "raid_0":
         for (var i=0; i<2; i++) {
@@ -165,6 +166,7 @@
           clone.appendTo(container);
         }
 
+        $(".description .raid_0").addClass('active')
         break;
       case "raid_1":
         for (var i=0; i<2; i++) {
@@ -172,6 +174,7 @@
           clone.appendTo(container);
         }
 
+        $(".description .raid_1").addClass('active')
         break;
 
       case "raid_5":
@@ -180,6 +183,7 @@
           clone.appendTo(container);
         }
 
+        $(".description .raid_5").addClass('active')
         $(container).addClass("raid_5")
         break;
 
@@ -189,6 +193,7 @@
           clone.appendTo(container);
         }
 
+        $(".description .raid_6").addClass('active')
         $(container).addClass("raid_5")
         break;
 
@@ -198,6 +203,7 @@
           clone.appendTo(container);
         }
 
+        $(".description .raid_10").addClass('active')
         $(container).addClass("raid_10")
         break;
 
@@ -383,6 +389,14 @@
     $('.read-data.button').click(function() {
       readData();
       disableButtons(['reset'])
+    })
+
+    $('.help-button').click(function() {
+      $('.info-overlay').toggleClass('active')
+    })
+
+    $('.close-button').click(function() {
+       $('.info-overlay').removeClass('active')
     })
 
     $( ".raid-select").change(function() {

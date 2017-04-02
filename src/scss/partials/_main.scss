@@ -48,7 +48,7 @@ body {
 
 .data-container {
   position: absolute;
-  top: 140px;
+  top: 180px;
   width: 100%;
   text-align: center;
 }
@@ -159,5 +159,72 @@ body {
 
   &.success {
     color: green;
+  }
+}
+
+.description {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  text-align: center;
+
+  div {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  h1 {
+    margin: 0 10px;
+  }
+
+  p {
+    margin: 5px 10px;
+  }
+}
+
+.help-button,
+.close-button {
+  display: block;
+  position: absolute;
+  right: 25px;
+  top: 22px;
+
+  img {
+    max-width: 25px;
+  }
+}
+
+.info-overlay {
+  display: none;
+
+  &.active {
+    z-index: 1;
+    position: fixed;
+    width: 80%;
+    margin: 0 10%;
+    top: 100px;
+    display: block;
+    background: rgb(213, 230, 253);
+    padding: 40px;
+  }
+
+  .close-button img {
+    max-width: 30px;
+  }
+
+  ul {
+    margin: 0 10px;
+    padding: 0;
+    li {
+      list-style: none;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+    font-size: 14px;
   }
 }
